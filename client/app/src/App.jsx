@@ -1,24 +1,29 @@
-import { useState } from 'react'
 import './App.css'
+import { useState } from 'react';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [books, setBooks] = useState([]);
+
+  const fetchBooks = async () => {
+    try{
+        const response = await fetch("http://127.0.0.1:8000/api/books/");
+        const data = await response.json
+    } catch (err){
+        console.log(err);
+    }
+  };
 
   return (
     <>
       
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <h1>Book Website</h1>
+
+      <div>
+        <input type='text' placeholder='Book Title...'/>
+        <input type='number' placeholder='Release Date...'/>
+        <button>Add Book</button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
     </>
   )
 }
